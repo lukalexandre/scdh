@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCDH - Sistema de Custódia CAIXA</title>
+    <style>
+        /* Paleta de Cores CAIXA e Variáveis */
+        :root {
+            --caixa-azul: #005CA9;
+            --caixa-laranja: #F39200;
+            --caixa-laranja-hover: #D87E00;
+            --fundo-tela: #F0F4F7;
+            --fundo-card: #FFFFFF;
+            --texto-principal: #333333;
+            --texto-secundario: #666666;
+            --borda: #CCCCCC;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--fundo-tela);
+            margin: 0;
+            padding: 0;
+            color: var(--texto-principal);
+        }
+
+        /* Cabeçalho Corporativo */
+        .topbar {
+            background-color: var(--caixa-azul);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--caixa-laranja);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .topbar-logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+            .topbar-logo span {
+                color: var(--caixa-laranja);
+            }
+
+        .topbar-user {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: var(--fundo-card);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background-color: #FAFAFA;
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--borda);
+        }
+
+            .section-header h2 {
+                margin: 0;
+                font-size: 20px;
+                color: var(--caixa-azul);
+            }
+
+        .section-body {
+            padding: 30px;
+        }
+
+        /* Formulário */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+            .form-group.full-width {
+                grid-column: span 2;
+            }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--texto-secundario);
+            text-transform: uppercase;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"] {
+            padding: 10px 12px;
+            border: 1px solid var(--borda);
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background-color: #FCFCFC;
+        }
+
+            input[type="text"]:focus,
+            input[type="number"]:focus,
+            input[type="file"]:focus {
+                outline: none;
+                border-color: var(--caixa-azul);
+                box-shadow: 0 0 0 2px rgba(0, 92, 169, 0.2);
+                background-color: #FFFFFF;
+            }
+
+        /* Botão CAIXA */
+        .btn-submit {
+            background-color: var(--caixa-laranja);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+            .btn-submit:hover {
+                background-color: var(--caixa-laranja-hover);
+            }
+
+        /* Alertas */
+        .alert {
+            padding: 12px 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+            display: none;
+            font-size: 14px;
+            font-weight: 600;
+            border-left: 4px solid transparent;
+        }
+
+            .alert.success {
+                background-color: #EDF7ED;
+                color: #1E4620;
+                border-left-color: #4CAF50;
+                display: block;
+            }
+
+            .alert.error {
+                background-color: #FDEDED;
+                color: #5F2120;
+                border-left-color: #F44336;
+                display: block;
+            }
+
+            .alert.info {
+                background-color: #E5F6FD;
+                color: #014361;
+                border-left-color: #03A9F4;
+                display: block;
+            }
+
+        /* Tabela Corporativa */
+        .table-container {
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #F5F5F5;
+            color: var(--texto-secundario);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 2px solid var(--borda);
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #EEEEEE;
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background-color: #F9FBFC;
+        }
+
+        .btn-download {
+            background-color: white;
+            color: var(--caixa-azul);
+            border: 1px solid var(--caixa-azul);
+            padding: 6px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+            .btn-download:hover {
+                background-color: var(--caixa-azul);
+                color: white;
+            }
+
+        /* Rodapé */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--texto-secundario);
+            font-size: 12px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="topbar-logo">CAIXA <span>SCDH</span></div>
+        <div class="topbar-user">👤 Agência 0845 - Terminal 01</div>
+    </div>
+
+    <div class="container">
+
+        <div class="section-header">
+            <h2>📄 Custódia de Novo Contrato Habitacional</h2>
+        </div>
+        <div class="section-body">
+            <form id="formUpload" onsubmit="fazerUpload(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nº do Contrato</label>
+                        <input type="text" id="numeroContrato" required placeholder="Ex: 8144002938">
+                    </div>
+                    <div class="form-group">
+                        <label>CPF do Mutuário</label>
+                        <input type="text" id="cpfCliente" required placeholder="Apenas números">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Valor de Avaliação do Imóvel (R$)</label>
+                        <input type="number" id="valorImovel" step="0.01" required placeholder="Ex: 350000.00">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Arquivo Digitalizado (Somente PDF, Máx. 5MB)</label>
+                        <input type="file" id="arquivo" accept="application/pdf" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit">🔒 Autenticar e Enviar para Custódia</button>
+            </form>
+            <div id="mensagem" class="alert"></div>
+        </div>
+
+        <div class="section-header" style="border-top: 5px solid #F0F4F7;">
+            <h2>📂 Arquivo Geral da Agência</h2>
+        </div>
+        <div class="section-body table-container" style="margin-top: 0; padding-top: 10px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nº Contrato</th>
+                        <th>CPF</th>
+                        <th>Valor (R$)</th>
+                        <th style="text-align: center;">Documento</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaContratos">
+                    <tr><td colspan="4" style="text-align: center; color: #999;">Consultando base de dados...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2026 Caixa Econômica Federal. Uso exclusivo corporativo.<br>
+        Sistema de Custódia Digital de Habitação (SCDH) - v1.0.4
+    </div>
+
+    <script>
+        async function fazerUpload(event) {
+            event.preventDefault();
+            const msg = document.getElementById('mensagem');
+            const formDados = new FormData();
+
+            formDados.append("numeroContrato", document.getElementById('numeroContrato').value);
+            formDados.append("cpfCliente", document.getElementById('cpfCliente').value);
+            formDados.append("valorImovel", document.getElementById('valorImovel').value);
+            formDados.append("arquivo", document.getElementById('arquivo').files[0]);
+
+            msg.className = "alert info";
+            msg.innerText = "⏳ Processando e auditando transação...";
+
+            try {
+                const response = await fetch('/api/contratos/upload', { method: 'POST', body: formDados });
+                const resultado = await response.json();
+
+                if (response.ok) {
+                    msg.className = "alert success";
+                    msg.innerText = "✅ " + resultado.mensagem;
+                    document.getElementById('formUpload').reset();
+                    listarContratos();
+                } else {
+                    msg.className = "alert error";
+                    msg.innerText = "❌ Transação Recusada: " + resultado.erro;
+                }
+            } catch (error) {
+                msg.className = "alert error";
+                msg.innerText = "❌ Erro de Sistema: Falha na comunicação com o servidor central.";
+            }
+        }
+
+        async function listarContratos() {
+            const tbody = document.getElementById('tabelaContratos');
+            try {
+                const response = await fetch('/api/contratos/listar');
+                const contratos = await response.json();
+
+                tbody.innerHTML = "";
+                if (contratos.length === 0) {
+                    tbody.innerHTML = "<tr><td colspan='4' style='text-align: center; color: #999;'>Nenhum contrato localizado no arquivo desta agência.</td></tr>";
+                    return;
+                }
+
+                contratos.forEach(c => {
+                    const tr = document.createElement('tr');
+
+                    // Formatação do valor para padrão Real (BRL)
+                    const valorFormatado = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(c.valorImovel);
+
+                    tr.innerHTML = `
+                            <td style="font-weight: bold; color: #005CA9;">${c.numeroContrato}</td>
+                            <td>${c.cpfCliente}</td>
+                            <td>${valorFormatado}</td>
+                            <td style="text-align: center;">
+                                <a href="/api/contratos/download/${c.id}" class="btn-download" target="_blank">📄 Visualizar PDF</a>
+                            </td>
+                        `;
+                    tbody.appendChild(tr);
+                });
+            } catch (error) {
+                tbody.innerHTML = "<tr><td colspan='4' style='text-align: center; color: #F44336; font-weight: bold;'>⚠️ Erro ao acessar o banco de dados.</td></tr>";
+            }
+        }
+
+        // Carrega a lista ao abrir o sistema
+        window.onload = listarContratos;
+    </script>
+</body>
+</html>
